@@ -22,6 +22,6 @@ class Photo < ApplicationRecord
     end
 
     def forbid_update_uuid
-      return unless uuid_changed?
+      self.uuid = self.uuid_was if self.uuid_changed?
     end
 end
