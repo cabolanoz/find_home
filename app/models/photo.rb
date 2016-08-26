@@ -14,9 +14,14 @@ class Photo < ApplicationRecord
   validates_presence_of :property
 
   before_create :set_uuid
+  before_update :forbid_update_uuid
 
   private
     def set_uuid
       self.uuid = SecureRandom.uuid if self.uuid.blank?
+    end
+
+    def forbid_update_uuid
+      return unless uuid_changed?
     end
 end
