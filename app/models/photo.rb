@@ -11,6 +11,12 @@
 
 class Photo < ApplicationRecord
   belongs_to :property
-  validates_presence_of :uuid
   validates_presence_of :property
+
+  before_create :set_uuid
+
+  private
+    def set_uuid
+      self.uuid = SecureRandom.uuid if self.uuid.blank?
+    end
 end
