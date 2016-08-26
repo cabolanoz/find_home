@@ -12,4 +12,6 @@
 
 class Property < ApplicationRecord
   belongs_to :property_type
+  validates_presence_of :title
+  validates_presence_of :description
 end
