@@ -84,7 +84,6 @@ tags
 # Files
 erd.pdf
 Icon?
-config/database.yml
 
 # ruby version
 .ruby-version
