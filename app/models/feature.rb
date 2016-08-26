@@ -9,5 +9,7 @@
 #
 
 class Feature < ApplicationRecord
+  has_many :features_properties
+  has_many :properties, through: :features_properties
   validates_presence_of :name
 end

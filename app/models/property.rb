@@ -12,6 +12,8 @@
 
 class Property < ApplicationRecord
   belongs_to :property_type
+  has_many :features_properties
+  has_many :features, through: :features_properties
   validates_presence_of :title
   validates_presence_of :description
 end
