@@ -11,16 +11,16 @@ RSpec.describe Photo, type: :model do
     expect(photo.uuid).to_not be_nil
 
     uuid = photo.uuid
-    photo.update_attributes(uuid: 'new bogus id')
+    photo.update_attributes(uuid: Faker::Code.ean)
     expect(photo.uuid).to be_eql(uuid)
   end
 
   def create_property
-    property_type = PropertyType.create!(name: "Bogus property type")
+    property_type = PropertyType.create!(name: Faker::Hipster.word)
     Property.create!(
-      title: "Bogus title",
+      title: Faker::Name.title,
       property_type: property_type,
-      description: "Bogus description"
+      description: Faker::Lorem.sentence
     )
   end
 end

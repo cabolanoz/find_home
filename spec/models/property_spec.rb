@@ -8,9 +8,9 @@ RSpec.describe Property, type: :model do
     end
 
     it "Property without title or description should not be valid" do
-      property = Property.new(title: "Bogus title for a property")
+      property = Property.new(title: Faker::Name.title)
       expect(property).to_not be_valid
-      property = Property.new(description: "Bogus description for a property")
+      property = Property.new(description: Faker::Lorem.sentence)
       expect(property).to_not be_valid
     end
   end
