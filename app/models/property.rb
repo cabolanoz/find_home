@@ -15,5 +15,6 @@ class Property < ApplicationRecord
   has_many :features_properties
   has_many :features, through: :features_properties
   validates_presence_of :title
+  validates_presence_of :property_type
   validates_presence_of :description
 end

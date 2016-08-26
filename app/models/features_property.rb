@@ -12,5 +12,7 @@
 class FeaturesProperty < ApplicationRecord
   belongs_to :feature
   belongs_to :property
+  validates_presence_of :feature
+  validates_presence_of :property
   validates_numericality_of :quantity, only_integer: true
 end
