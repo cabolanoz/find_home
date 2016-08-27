@@ -1,4 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <label class="control-label text-primary"><%= @feature.name %></label>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="actions pull-right">
+      <%= link_to 'Back', features_path, class: 'btn btn-default' %>
+      <%= link_to 'Edit', edit_feature_path(@feature), class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

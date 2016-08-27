@@ -16,7 +16,7 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th class="text-center" colspan="3">Actions</th>
+          <th class="col-lg-2 text-center" colspan="3">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -24,9 +24,21 @@
           <% @features.each do |feature| %>
             <tr>
               <td><%= feature.name %></td>
-              <td><%= link_to 'Show', feature %></td>
-              <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-              <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td>
+                <%= link_to feature do %>
+                  <i class="glyphicon glyphicon-zoom-in"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to edit_feature_path(feature) do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to feature, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="glyphicon glyphicon-remove"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         <% else %>
