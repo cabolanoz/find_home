@@ -38,6 +38,28 @@
             </div>
             <div class="cleafix"></div>
             <h1 class="page-header">Features</h1>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @property.features_properties.any? %>
+                  <% @property.features_properties.each do |features_property| %>
+                    <tr>
+                      <td><%= features_property.feature.name %></td>
+                      <td><%= features_property.quantity %></td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="3">No features added to this property</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="tab-pane" id="photos" role="tabpanel">

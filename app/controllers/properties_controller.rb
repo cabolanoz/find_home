@@ -64,6 +64,25 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
+        # Verify whether features array comes in the parameters list
+        if params[:features].present? && !params[:features].empty?
+          # Remove all features by property objects
+          @property.features_properties.delete_all
+
+          # Iterate through all features added to property
+          for i in 0..params[:features].count - 1
+            # Skip saving those features that has no quantity
+            next if params[:quantities][i].empty? || params[:quantities][i].to_i <= 0
+
+            # Create new features properties
+            @property.features_properties.create!(
+              feature_id: params[:features][i],
+              property: @property,
+              quantity: params[:quantities][i].to_i
+            )
+          end
+        end
+
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
@@ -86,7 +105,7 @@ class PropertiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = Property.includes(:property_type).friendly.find(params[:id])
+      @property = Property.includes(:property_type, features_properties: [:feature]).friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
