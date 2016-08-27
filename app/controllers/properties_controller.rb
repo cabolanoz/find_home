@@ -34,6 +34,22 @@ class PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.save
+        # Verify whether features array comes in the parameters list
+        if params[:features].present? && !params[:features].empty?
+          # Iterate through all features added to property
+          for i in 0..params[:features].count - 1
+            # Skip saving those features that has no quantity
+            next if params[:quantities][i].empty? || params[:quantities][i].to_i <= 0
+
+            # Create new features properties
+            @property.features_properties.create!(
+              feature_id: params[:features][i],
+              property: @property,
+              quantity: params[:quantities][i].to_i
+            )
+          end
+        end
+
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else

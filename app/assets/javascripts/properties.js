@@ -15,14 +15,13 @@ var init = function init() {
     	//verifies the existence of cost center in the table
     	if (!isFeatureInTable(value)) {
 	      var openTr = `<tr id=featureIdRow-${value}>`;
-    		var tdTextFeatureId = `<td class="hidden"><input type="text" value=${value} /></td>`;
-        var tdTextFeatureName = `<td>${text}</td>`;
-        var tdTextQuantity = `<td><input class="form-control" type="number" value="0" /></td>`;
+    		var tdTextFeature = `<td><input name="features[]" type="hidden" value=${value} />${text}</td>`;
+        var tdTextQuantity = `<td><input class="form-control" name="quantities[]" type="number" value="1" /></td>`;
     		var tdButtonRemove = `<td class="text-center"><a class="btn btn-danger btn-xs" id="btnRemoveFeature-${value}"><i class="glyphicon glyphicon-remove"></i></a></td>`;
     		var closeTr = `</tr>`;
 
         // Build row with all elements
-    		var row = openTr + tdTextFeatureId + tdTextFeatureName + tdTextQuantity + tdButtonRemove + closeTr;
+    		var row = openTr + tdTextFeature + tdTextQuantity + tdButtonRemove + closeTr;
 
         // Append row to body table
     		$("#tableFeaturesProperties > tbody").append(row);
