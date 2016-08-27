@@ -17,6 +17,7 @@ class PropertiesController < ApplicationController
   # GET /properties/new
   def new
     @property_types = PropertyType.enabled
+    @features = Feature.all
     @property = Property.new
   end
 
