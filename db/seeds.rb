@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+PropertyType.create(name: Faker::Name.title)
+PropertyType.create(name: Faker::Name.title)
+PropertyType.create(name: Faker::Name.title)
+
+Property.create(title: Faker::Name.title, property_type_id: 1, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 2, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 3, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 2, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 3, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 1, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 1, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 3, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 2, description: Faker::Lorem.sentence)
+Property.create(title: Faker::Name.title, property_type_id: 1, description: Faker::Lorem.sentence)
