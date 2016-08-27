@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827155007) do
+ActiveRecord::Schema.define(version: 20160827155317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,9 @@ ActiveRecord::Schema.define(version: 20160827155007) do
     t.text     "description",      null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "slug"
     t.index ["property_type_id"], name: "index_properties_on_property_type_id", using: :btree
+    t.index ["slug"], name: "index_properties_on_slug", unique: true, using: :btree
   end
 
   create_table "property_types", force: :cascade do |t|
