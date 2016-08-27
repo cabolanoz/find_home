@@ -1,15 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-12">
+    <p id="notice"><%= notice %></p>
 
-<div class="pull-right">
-  <%= link_to 'New Property', new_property_path, class: 'btn btn-default' %>
+    <div class="pull-right">
+      <%= link_to 'New Property', new_property_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
 </div>
-
-<h1>Properties</h1>
-
-<% @properties.each do |property| %>
-  <h3><%= link_to property.title, property %></h3>
-  <h4><%= property.property_type.name %></h4>
-  <p><%= property.description %></p>
-<% end %>
-
-<%= will_paginate @properties %>
+<hr />
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Properties</h1>
+    <% @properties.each do |property| %>
+      <h3><%= link_to property.title, property %> <small><i class="glyphicon glyphicon-home"></i> <%= property.property_type.name %></small></h3>
+      <p><%= property.description %></p>
+      <hr />
+    <% end %>
+    <div class="pull-right">
+      <%= will_paginate @properties, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>
