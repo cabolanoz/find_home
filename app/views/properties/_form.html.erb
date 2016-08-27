@@ -76,6 +76,15 @@
                 </tr>
               </thead>
               <tbody>
+                <% unless @property.nil? %>
+                  <% @property.features_properties.each do |features_property| %>
+                    <tr id="featureIdRow-<%= features_property.feature_id %>">
+                      <td><input name="features[]" type="hidden" value="<%= features_property.feature_id %>" /><%= features_property.feature.name %></td>
+                      <td><input class="form-control" name="quantities[]" type="number" value="<%= features_property.quantity %>" /></td>
+                      <td class="text-center"><a class="btn btn-danger btn-xs" id="btnRemoveFeature-<%= features_property.feature_id %>"><i class="glyphicon glyphicon-remove"></i></a></td>
+                    </tr>
+                  <% end %>
+                <% end %>
               </tbody>
             </table>
           </div>
