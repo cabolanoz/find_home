@@ -91,7 +91,13 @@
         </div>
       </div>
       <div class="tab-pane" id="photos" role="tabpanel">
-        Photos
+        
+        <div class="photo-add-placeholder" id="preview">
+          Add Photo
+        </div>
+
+        <input type='file' id="upload0" name="photos[0]" accept="image/*" onchange="previewImage(event)" style="display:none" />
+
       </div>
     </div>
 
@@ -100,4 +106,22 @@
       <%= f.submit 'Save', class: 'btn btn-success' %>
     </div>
   </div>
+  <script>
+      $(function() {
+        $('#preview').click(function() {
+          var inputId = $("input[type=file]").length - 1;
+          $('#upload'+inputId).trigger('click');
+        })
+      })
+      function previewImage(event) {
+        var src = URL.createObjectURL(event.target.files[0]);
+        $("<img class='uploaded-image' width=200 height=200 src="+ src +" />").insertBefore(("#preview"))
+
+        var inputId = $("input[type=file]").length;
+        var newInput = "<input type='file' id='upload"+inputId+"' name='photos["+inputId+"]' accept='image/*' onchange='previewImage(event)' style='display:none' />";
+        $(newInput).insertBefore(("#preview"));
+        
+        
+      }
+  </script>
 <% end %>
