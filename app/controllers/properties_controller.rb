@@ -50,9 +50,12 @@ class PropertiesController < ApplicationController
           end
         end
 
+        # Get photos parameter
+        photos = params[:photos]
+
         # Verify whether photos array comes in the parameters list
-        if params[:photos].present?
-          params[:photos].each { |key| Photo.create(property: @property) unless photos[key].empty? } if @property.valid?
+        if photos.present?
+          photos.each { |key| Photo.create(property: @property) unless photos[key].empty? } if @property.valid?
         end
 
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
