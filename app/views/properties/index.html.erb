@@ -6,7 +6,7 @@
 
 <h1>Properties</h1>
 
-<%= @properties.each do |property| %>
+<% @properties.each do |property| %>
   <h3><%= link_to property.title, property %></h3>
   <h4><%= property.property_type.name %></h4>
   <p><%= property.description %></p>
