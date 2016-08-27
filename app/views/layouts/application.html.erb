@@ -11,6 +11,7 @@
   <body>
     <%= render partial: "shared/navbar" %>
     <div class="container">
+      <%= javascript_include_tag params[:controller] if assets_manifest.assets["#{params[:controller]}.js"] %>
       <%= yield %>
     </div>
   </body>
