@@ -28,10 +28,17 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
+    
+    @property_types = PropertyType.enabled
+    @features = Feature.all
     @property = Property.new(property_params)
+
+    photos = params[:photos]
 
     respond_to do |format|
       if @property.save
+
+        photos.each {|key| Photo.create(property:@property) unless photos[key].empty?} if @property.valid?
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else

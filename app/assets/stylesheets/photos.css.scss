@@ -1,0 +1,31 @@
+.photo-add-placeholder {
+  width:200px;
+  height:200px;
+  margin:16px;
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px;
+  text-align: center;
+  line-height: 200px;
+  background: #aaa;
+  font-size: 18px;
+  color: #000;
+  float: left;
+  font-weight: 500;
+}
+
+.uploaded-image {
+  width:200px;
+  height:200px;
+  margin:16px;
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px;
+  float:left;
+}
+
+.photo-add-placeholder:hover{
+  background: #bbb; 
+  cursor: pointer;
+  border-width: 2px;
+}
