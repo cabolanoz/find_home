@@ -23,6 +23,8 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
+    @property_types = PropertyType.enabled
+    @features = Feature.all
   end
 
   # POST /properties
