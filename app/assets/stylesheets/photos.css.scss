@@ -1,31 +1,31 @@
 .photo-add-placeholder {
-  width:200px;
-  height:200px;
-  margin:16px;
-  border-style: solid;
-  border-color: #ccc;
-  border-width: 1px;
-  text-align: center;
-  line-height: 200px;
   background: #aaa;
-  font-size: 18px;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
   color: #000;
   float: left;
+  font-size: 18px;
   font-weight: 500;
+  height: 200px;
+  margin: 16px;
+  line-height: 200px;
+  text-align: center;
+  width: 200px;
 }
 
 .uploaded-image {
-  width:200px;
-  height:200px;
-  margin:16px;
   border-style: solid;
   border-color: #ccc;
   border-width: 1px;
-  float:left;
+  float: left;
+  height: 200px;
+  margin: 16px;
+  width: 200px;
 }
 
 .photo-add-placeholder:hover{
-  background: #bbb; 
-  cursor: pointer;
+  background: #bbb;
   border-width: 2px;
+  cursor: pointer;
 }
