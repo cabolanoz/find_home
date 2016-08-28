@@ -16,7 +16,7 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th class="col-lg-2 text-center" colspan="3">Actions</th>
+          <th class="text-center" colspan="3">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -24,17 +24,17 @@
           <% @features.each do |feature| %>
             <tr>
               <td><%= feature.name %></td>
-              <td>
+              <td class="col-lg-1">
                 <%= link_to feature do %>
                   <i class="glyphicon glyphicon-zoom-in"></i>
                 <% end %>
               </td>
-              <td>
+              <td class="col-lg-1">
                 <%= link_to edit_feature_path(feature) do %>
                   <i class="glyphicon glyphicon-pencil"></i>
                 <% end %>
               </td>
-              <td>
+              <td class="col-lg-1 hidden">
                 <%= link_to feature, method: :delete, data: { confirm: 'Are you sure?' } do %>
                   <i class="glyphicon glyphicon-remove"></i>
                 <% end %>
