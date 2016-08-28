@@ -2,16 +2,18 @@
 #
 # Table name: photos
 #
-#  id          :integer          not null, primary key
-#  uuid        :string           not null
-#  property_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  uuid         :string           not null
+#  property_id  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  content_type :string
 #
 
 class Photo < ApplicationRecord
   belongs_to :property
   validates_presence_of :property
+  validates_presence_of :content_type
 
   before_create :set_uuid
   before_update :forbid_update_uuid
