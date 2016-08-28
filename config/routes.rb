@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :features
 
   # Resources for photos
-  resources :photos
+  # resources :photos
 end

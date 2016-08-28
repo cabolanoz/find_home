@@ -118,7 +118,10 @@ class PropertiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
-      @property = Property.includes(:property_type, features_properties: [:feature]).friendly.find(params[:id])
+      @property = Property
+                  .includes(:property_type, {features_properties: [:feature]}, :photos)
+                  .friendly
+                  .find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

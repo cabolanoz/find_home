@@ -63,7 +63,11 @@
           </div>
         </div>
         <div class="tab-pane" id="photos" role="tabpanel">
-          Photos
+          <% unless @property.photos.empty? %>
+            <% @property.photos.each do |photo| %>
+              <img class="uploaded-image" width=200 height=200 src="<%= '/public/uploads/044a43ff-362f-4683-bc77-4e0f915df695.png' %>" />
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -75,7 +79,7 @@
     <div class="pull-right">
       <%= link_to 'Back', properties_path, class: 'btn btn-default' %>
       <%= link_to 'Edit', edit_property_path(@property), class: 'btn btn-primary' %>
-      <%= link_to 'Destroy', edit_property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <%= link_to 'Destroy', destroy_property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
     </div>
   </div>
 </div>

@@ -112,10 +112,10 @@
 
       function previewImage(event) {
         var src = URL.createObjectURL(event.target.files[0]);
-        $("<img class='uploaded-image' width=200 height=200 src="+ src +" />").insertBefore(("#preview"))
+        $("<img class='uploaded-image' width=200 height=200 src=" + src + " />").insertBefore(("#preview"))
 
         var inputId = $("input[type=file]").length;
-        var newInput = "<input type='file' id='upload"+inputId+"' name='photos["+inputId+"]' accept='image/*' onchange='previewImage(event)' style='display:none' />";
+        var newInput = "<input type='file' id='upload" + inputId + "' name='photos[" + inputId + "]' accept='image/*' onchange='previewImage(event)' style='display:none' />";
         $(newInput).insertBefore(("#preview"));
       }
   </script>
