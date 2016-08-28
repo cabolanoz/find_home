@@ -31,6 +31,8 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
+    @property_types = PropertyType.enabled
+    @features = Feature.all
 
     respond_to do |format|
       if @property.save
@@ -55,7 +57,17 @@ class PropertiesController < ApplicationController
 
         # Verify whether photos array comes in the parameters list
         if photos.present?
-          photos.each { |key| Photo.create(property: @property) unless photos[key].empty? } if @property.valid?
+          photos.each do |key|
+            # Skip saving photi if key is nil
+            next if photos[key].nil?
+
+            photo = Photo.create(property: @property, content_type: photos[key].content_type)
+            image_name = "#{photo.uuid}#{Rack::Mime::MIME_TYPES.invert[photos[key].content_type]}"
+            
+            File.open(Rails.root.join('public', 'uploads', image_name), 'wb') do |file|
+              file.write(photos[key].read)
+            end
+          end
         end
 
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
