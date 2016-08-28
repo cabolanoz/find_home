@@ -12,22 +12,24 @@
   <div class="col-lg-12">
     <h1>Properties</h1>
     <div class="clearfix"></div><br />
-    <div class="form-horizontal">
+    <%= form_tag(properties_path, { class: 'form-horizontal', method: 'get' }) do %>
       <div class="form-group">
         <div class="col-sm-11">
-          <input class="form-control" type="text" placeholder="Search by Title, Property Type or Description..." />
+          <%= search_field_tag :search, params[:search], { class: 'form-control', method: :get, placeholder: 'Search by Title, Property Type or Description...' } %>
         </div>
-        <button type="button" class="btn btn-success">Search...</button>
+        <%= submit_tag 'Search', { class: 'btn btn-success' } %>
       </div>
-    </div>
-    <hr />
-    <% @properties.each do |property| %>
-      <h3><%= link_to property.title, property %> <small><i class="glyphicon glyphicon-home"></i> <%= property.property_type.name %></small></h3>
-      <p><%= property.description %></p>
-      <hr />
     <% end %>
-    <div class="pull-right">
-      <%= will_paginate @properties, renderer: BootstrapPagination::Rails %>
-    </div>
+    <hr />
+    <% if @properties.any? %>
+      <% @properties.each do |property| %>
+        <h3><%= link_to property.title, property %> <small><i class="glyphicon glyphicon-home"></i> <%= property.property_type.name %></small></h3>
+        <p><%= property.description %></p>
+        <hr />
+      <% end %>
+      <div class="pull-right">
+        <%= will_paginate @properties, renderer: BootstrapPagination::Rails %>
+      </div>
+    <% end %>
   </div>
 </div>

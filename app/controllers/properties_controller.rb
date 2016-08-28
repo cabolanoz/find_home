@@ -4,9 +4,26 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property
-                  .includes(:property_type)
-                  .paginate(page: params[:page], per_page: 5)
+    search = params[:search]
+
+    if search.present?
+      @properties = Property
+                    .includes(:property_type)
+                    .joins(:property_type)
+                    .where(
+                      'title ILIKE ? OR property_types.name ILIKE ? OR description ILIKE ?',
+                      "%#{search}%",
+                      "%#{search}%",
+                      "%#{search}%"
+                    )
+                    .order(:title)
+                    .paginate(page: params[:page], per_page: 5)
+    else
+      @properties = Property
+                    .includes(:property_type)
+                    .order(:title)
+                    .paginate(page: params[:page], per_page: 5)
+    end
   end
 
   # GET /properties/1

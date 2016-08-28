@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root to: 'properties#index'
 
   # Resources for properties
-  resources :properties
+  resources :properties do
+    member do
+      :search
+    end
+  end
 
   # Resources for features
   resources :features
