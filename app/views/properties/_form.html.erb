@@ -91,6 +91,13 @@
         </div>
       </div>
       <div class="tab-pane" id="photos" role="tabpanel">
+        <% unless @property.nil? %>
+          <% unless @property.photos.empty? %>
+            <% @property.photos.each do |photo| %>
+              <img class="uploaded-image" width=200 height=200 src=<%= "/uploads/#{photo.filename}" %> />
+            <% end %>
+          <% end %>
+        <% end %>
         <div class="photo-add-placeholder" id="preview">Add Photo</div>
         <input type='file' id="upload0" name="photos[0]" accept="image/*" onchange="previewImage(event)" style="display:none" />
       </div>
