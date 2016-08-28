@@ -16,7 +16,7 @@ class Property < ApplicationRecord
   friendly_id :title, use: :slugged
 
   belongs_to :property_type
-  has_many :photos
+  has_many :photos, dependent: :destroy
   has_many :features_properties, dependent: :destroy
   has_many :features, through: :features_properties
   validates_presence_of :title
