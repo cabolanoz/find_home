@@ -18,6 +18,10 @@ class Photo < ApplicationRecord
   before_create :set_uuid
   before_update :forbid_update_uuid
 
+  def filename
+    "#{uuid}#{Rack::Mime::MIME_TYPES.invert[content_type]}"
+  end
+
   private
     def set_uuid
       self.uuid = SecureRandom.uuid if self.uuid.blank?

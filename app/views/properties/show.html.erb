@@ -65,7 +65,7 @@
         <div class="tab-pane" id="photos" role="tabpanel">
           <% unless @property.photos.empty? %>
             <% @property.photos.each do |photo| %>
-              <img class="uploaded-image" width=200 height=200 src="<%= '/public/uploads/044a43ff-362f-4683-bc77-4e0f915df695.png' %>" />
+              <img class="uploaded-image" width=200 height=200 src=<%= "/uploads/#{photo.filename}" %> />
             <% end %>
           <% end %>
         </div>
