@@ -18,8 +18,9 @@ class Photo < ApplicationRecord
   before_create :set_uuid
   before_update :forbid_update_uuid
 
-  def filename
-    "#{uuid}#{Rack::Mime::MIME_TYPES.invert[content_type]}"
+  def filename(type="MEDIUM")
+    return "#{uuid}1200x1200#{Rack::Mime::MIME_TYPES.invert[content_type]}" if type == "MEDIUM"
+    return  "#{uuid}200x200#{Rack::Mime::MIME_TYPES.invert[content_type]}" if type == "THUMBNAIL"
   end
 
   private
