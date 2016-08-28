@@ -70,6 +70,9 @@ pickle-email-*.html
 # Textmate project files
 /*.tmproj
 
+#upload filed
+public/uploads/*
+
 # vim artifacts
 **.swp
 
@@ -84,7 +87,6 @@ tags
 # Files
 erd.pdf
 Icon?
-config/database.yml
 
 # ruby version
 .ruby-version

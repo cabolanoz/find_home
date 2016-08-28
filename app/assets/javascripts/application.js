@@ -13,4 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
+//= require select2
 //= require_tree .
+
+// Apply select2 to all select elements
+$(document).ready(function() {
+  $('select').select2({
+    theme: "bootstrap"
+  });
+});

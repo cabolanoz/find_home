@@ -1,0 +1,129 @@
+<%= form_for(property, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+  <% if property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a aria-controls="home" data-toggle="tab" href="#general" role="tab">General Info & Features</a>
+      </li>
+      <li role="presentation">
+        <a aria-controls="profile" data-toggle="tab" href="#photos" role="tab">Photos</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="general" role="tabpanel">
+        <h1 class="page-header">General Info</h1>
+        <div class="field form-group">
+          <%= f.label :title, class: "control-label col-md-2" %>
+          <div class="col-md-10">
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+        <div class="field form-group">
+          <%= f.label :property_type_id, class: "control-label col-md-2" %>
+          <div class="col-md-10">
+            <%= f.select :property_type_id,
+              @property_types.map { |property_type| [property_type.name, property_type.id] },
+              { include_blank: 'Select...' },
+              { class: 'form-control'}
+            %>
+          </div>
+        </div>
+        <div class="field form-group">
+          <%= f.label :description, class: "control-label col-md-2" %>
+          <div class="col-md-10">
+            <%= f.text_area :description, class: "form-control", rows: 5 %>
+          </div>
+        </div>
+        <div class="cleafix"></div>
+        <h1 class="page-header">Features</h1>
+        <div class="field form-group">
+          <label class="control-label col-md-2"></label>
+          <div class="col-md-8">
+            <select class="form-control" id="selectFeatures" multiple="multiple">
+              <%= if @features.any?
+                @features.each do |feature| %>
+                  <option value="<%= feature.id %>"><%= feature.name %></option>
+                <% end
+              end %>
+            </select>
+          </div>
+          <div class="col-md-2 col-offset-1">
+            <a class="btn btn-primary" id="buttonAddFeature">
+              <i class="glyphicon glyphicon-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="field form-group">
+          <label class="control-label col-md-2"></label>
+          <div class="col-md-10">
+            <table class="table table-striped" id="tableFeaturesProperties">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th class="col-lg-1"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% unless @property.nil? %>
+                  <% @property.features_properties.each do |features_property| %>
+                    <tr id="featureIdRow-<%= features_property.feature_id %>">
+                      <td><input name="features[]" type="hidden" value="<%= features_property.feature_id %>" /><%= features_property.feature.name %></td>
+                      <td><input class="form-control" name="quantities[]" type="number" value="<%= features_property.quantity %>" /></td>
+                      <td class="text-center"><a class="btn btn-danger btn-xs" id="btnRemoveFeature-<%= features_property.feature_id %>"><i class="glyphicon glyphicon-remove"></i></a></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="photos" role="tabpanel">
+        <% unless @property.nil? %>
+          <% unless @property.photos.empty? %>
+            <% @property.photos.each do |photo| %>
+              <img class="uploaded-image" width=200 height=200 src=<%= "/uploads/#{photo.filename('MEDIUM')}" %> />
+            <% end %>
+          <% end %>
+        <% end %>
+        <div class="photo-add-placeholder" id="preview">Add Photo</div>
+        <input type='file' id="upload0" name="photos[0]" accept="image/*" onchange="previewImage(event)" style="display:none" />
+      </div>
+    </div>
+    <div class="clearfix"></div><br /><hr />
+    <div class="actions pull-right">
+      <%= link_to 'Back', properties_path, class: 'btn btn-default' %>
+      <%= f.submit 'Save', class: 'btn btn-success' %>
+    </div>
+  </div>
+  <br /><br /><br />
+  <script>
+      $(function() {
+        $('#preview').click(function() {
+          var inputId = $("input[type=file]").length - 1;
+          $('#upload' + inputId).trigger('click');
+        })
+      })
+
+      function previewImage(event) {
+        var src = URL.createObjectURL(event.target.files[0]);
+        $("<img class='uploaded-image' width=200 height=200 src=" + src + " />").insertBefore(("#preview"))
+
+        var inputId = $("input[type=file]").length;
+        var newInput = "<input type='file' id='upload" + inputId + "' name='photos[" + inputId + "]' accept='image/*' onchange='previewImage(event)' style='display:none' />";
+        $(newInput).insertBefore(("#preview"));
+      }
+  </script>
+<% end %>

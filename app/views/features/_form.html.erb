@@ -1,0 +1,24 @@
+<%= form_for(feature, html: { class: 'form-horizontal' }) do |f| %>
+  <% if feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+      <ul>
+      <% feature.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <%= f.label :name, class: "control-label col-md-2" %>
+    <div class="col-md-10">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <br />
+  <div class="actions pull-right">
+    <%= link_to 'Back', features_path, class: 'btn btn-default' %>
+    <%= f.submit 'Save', class: 'btn btn-success' %>
+  </div>
+<% end %>

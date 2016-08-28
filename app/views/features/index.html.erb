@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-12">
+    <p id="notice"><%= notice %></p>
+
+    <div class="pull-right">
+      <%= link_to 'New Feature', new_feature_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Features</h1>
+    <div class="clearfix"></div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="text-center" colspan="3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @features.any? %>
+          <% @features.each do |feature| %>
+            <tr>
+              <td><%= feature.name %></td>
+              <td class="col-lg-1">
+                <%= link_to feature do %>
+                  <i class="glyphicon glyphicon-zoom-in"></i>
+                <% end %>
+              </td>
+              <td class="col-lg-1">
+                <%= link_to edit_feature_path(feature) do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>
+              </td>
+              <td class="col-lg-1 hidden">
+                <%= link_to feature, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="glyphicon glyphicon-remove"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4">No features added yet</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
