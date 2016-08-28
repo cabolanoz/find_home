@@ -36,20 +36,14 @@ class PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.save
-        # Verify whether features array comes in the parameters list
-        if params[:features].present? && !params[:features].empty?
-          # Iterate through all features added to property
-          for i in 0..params[:features].count - 1
-            # Skip saving those features that has no quantity
-            next if params[:quantities][i].empty? || params[:quantities][i].to_i <= 0
+        # Get features parameter
+        features = params[:features]
 
-            # Create new features properties
-            @property.features_properties.create!(
-              feature_id: params[:features][i],
-              property: @property,
-              quantity: params[:quantities][i].to_i
-            )
-          end
+        # Verify whether features array comes in the parameters list
+        if features.present?
+          # Intantiate & create features by property
+          features_property_create = FeaturesPropertyCreate.new(@property)
+          features_property_create.create(features, params[:quantities])
         end
 
         # Get photos parameter
@@ -57,17 +51,9 @@ class PropertiesController < ApplicationController
 
         # Verify whether photos array comes in the parameters list
         if photos.present?
-          photos.each do |key|
-            # Skip saving photi if key is nil
-            next if photos[key].nil?
-
-            photo = Photo.create(property: @property, content_type: photos[key].content_type)
-            image_name = "#{photo.uuid}#{Rack::Mime::MIME_TYPES.invert[photos[key].content_type]}"
-            
-            File.open(Rails.root.join('public', 'uploads', image_name), 'wb') do |file|
-              file.write(photos[key].read)
-            end
-          end
+          # Intantiate & create photos by property
+          photo_create = PhotoCreate.new(@property)
+          photo_create.create(photos)
         end
 
         format.html { redirect_to @property, notice: 'Property was successfully created.' }
@@ -84,23 +70,30 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
+        # Get features parameter
+        features = params[:features]
+
         # Verify whether features array comes in the parameters list
-        if params[:features].present? && !params[:features].empty?
+        if features.present?
           # Remove all features by property objects
           @property.features_properties.delete_all
 
-          # Iterate through all features added to property
-          for i in 0..params[:features].count - 1
-            # Skip saving those features that has no quantity
-            next if params[:quantities][i].empty? || params[:quantities][i].to_i <= 0
+          # Intantiate & create features by property
+          features_property_create = FeaturesPropertyCreate.new(@property)
+          features_property_create.create(features, params[:quantities])
+        end
 
-            # Create new features properties
-            @property.features_properties.create!(
-              feature_id: params[:features][i],
-              property: @property,
-              quantity: params[:quantities][i].to_i
-            )
-          end
+        # Get photos parameter
+        photos = params[:photos]
+
+        # Verify whether photos array comes in the parameters list
+        if photos.present?
+          # Remove all photos by property objects
+          @property.photos.delete_all
+
+          # Intantiate & create photos by property
+          photo_create = PhotoCreate.new(@property)
+          photo_create.create(photos)
         end
 
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
