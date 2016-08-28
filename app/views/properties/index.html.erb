@@ -23,8 +23,19 @@
     <hr />
     <% if @properties.any? %>
       <% @properties.each do |property| %>
-        <h3><%= link_to property.title, property %> <small><i class="glyphicon glyphicon-home"></i> <%= property.property_type.name %></small></h3>
-        <p><%= property.description %></p>
+        <div class="form-horizontal">
+          <div class="form-group">
+            <% if property.photos.any? %>
+              <img class="col-sm-1 img-rounded" src=<%= "/uploads/#{property.photos.first.filename('THUMBNAIL')}" %> />
+            <% else %>
+              <%= image_tag 'placeholder-200x200.png', { class: 'col-sm-1 img-rounded' } %>
+            <% end %>
+            <div class="col-sm-11">
+              <h3><%= link_to property.title, property %> <small><i class="glyphicon glyphicon-home"></i> <%= property.property_type.name %></small></h3>
+              <p><%= property.description %></p>
+            </div>
+          </div>
+        </div>
         <hr />
       <% end %>
       <div class="pull-right">

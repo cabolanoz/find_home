@@ -94,7 +94,7 @@
         <% unless @property.nil? %>
           <% unless @property.photos.empty? %>
             <% @property.photos.each do |photo| %>
-              <img class="uploaded-image" width=200 height=200 src=<%= "/uploads/#{photo.filename}" %> />
+              <img class="uploaded-image" width=200 height=200 src=<%= "/uploads/#{photo.filename('MEDIUM')}" %> />
             <% end %>
           <% end %>
         <% end %>
