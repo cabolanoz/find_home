@@ -87,27 +87,27 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
+        # Remove all features by property objects
+        @property.features_properties.delete_all
+
         # Get features parameter
         features = params[:features]
 
         # Verify whether features array comes in the parameters list
         if features.present?
-          # Remove all features by property objects
-          @property.features_properties.delete_all
-
           # Intantiate & create features by property
           features_property_create = FeaturesPropertyCreate.new(@property)
           features_property_create.create(features, params[:quantities])
         end
+
+        # Remove all photos by property objects
+        @property.photos.delete_all
 
         # Get photos parameter
         photos = params[:photos]
 
         # Verify whether photos array comes in the parameters list
         if photos.present?
-          # Remove all photos by property objects
-          @property.photos.delete_all
-
           # Intantiate & create photos by property
           photo_create = PhotoCreate.new(@property)
           photo_create.create(photos)
