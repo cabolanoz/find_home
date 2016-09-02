@@ -82,5 +82,21 @@ RSpec.describe PropertiesController, type: :controller do
     end
   end
 
+  describe "PUT #update" do
+    let!(:property) {create(:property)}
+
+    it "should delete a property based in the id" do
+      delete :destroy, { id: property.id}
+      expect(Property.count).to be_zero
+    end
+
+    it "should delete a property based in the id" do
+      bogus_id = 2321
+      delete :destroy, { id: bogus_id}
+      expect(response).to have_http_status(404)
+    end
+
+  end
+
 
 end
