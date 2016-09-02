@@ -1,6 +1,10 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render status: :not_found, text: exception.message
+  end
+
   # GET /properties
   # GET /properties.json
   def index
@@ -48,11 +52,11 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
-    @property_types = PropertyType.enabled
-    @features = Feature.all
 
     respond_to do |format|
+
       if @property.save
+
         # Get features parameter
         features = params[:features]
 
