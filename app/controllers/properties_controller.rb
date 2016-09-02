@@ -105,7 +105,7 @@ class PropertiesController < ApplicationController
         end
 
         # Remove all photos by property objects
-        @property.photos.delete_all
+        #@property.photos.delete_all
 
         # Get photos parameter
         photos = params[:photos]
