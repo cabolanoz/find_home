@@ -23,7 +23,7 @@ class Photo < ApplicationRecord
 
     return nil unless extension.present?
     return "#{uuid}1200x1200#{extension}" if type == "MEDIUM"
-    return  "#{uuid}200x200#{extension}" if type == "THUMBNAIL"
+    return "#{uuid}200x200#{extension}" if type == "THUMBNAIL"
   end
 
   private
