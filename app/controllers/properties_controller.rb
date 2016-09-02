@@ -54,9 +54,7 @@ class PropertiesController < ApplicationController
     @property = Property.new(property_params)
 
     respond_to do |format|
-
       if @property.save
-
         # Get features parameter
         features = params[:features]
 

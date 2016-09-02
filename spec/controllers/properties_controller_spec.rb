@@ -95,8 +95,5 @@ RSpec.describe PropertiesController, type: :controller do
       delete :destroy, { id: bogus_id}
       expect(response).to have_http_status(404)
     end
-
   end
-
-
 end
