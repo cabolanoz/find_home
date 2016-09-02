@@ -28,7 +28,6 @@ RSpec.describe Photo, type: :model do
   end
 
   describe "filename usage" do
-
     it "should return filename for THUMBNAIL and MEDIUM" do
       expect(photo.filename).to be_eql("#{photo.uuid}1200x1200.jpg")
       expect(photo.filename("THUMBNAIL")).to be_eql("#{photo.uuid}200x200.jpg")
@@ -42,7 +41,5 @@ RSpec.describe Photo, type: :model do
       photo.content_type = "random_content_type"
       expect(photo.filename).to be_nil
     end
-
   end
-
 end
