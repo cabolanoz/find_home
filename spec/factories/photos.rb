@@ -13,6 +13,6 @@
 FactoryGirl.define do
   factory :photo do
     property { create(:property) }
-    content_type { "images/jpeg" }
+    content_type { "image/jpeg" }
   end
 end

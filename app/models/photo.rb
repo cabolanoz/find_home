@@ -19,8 +19,11 @@ class Photo < ApplicationRecord
   before_update :forbid_update_uuid
 
   def filename(type = "MEDIUM")
-    return "#{uuid}1200x1200#{Rack::Mime::MIME_TYPES.invert[content_type]}" if type == "MEDIUM"
-    return  "#{uuid}200x200#{Rack::Mime::MIME_TYPES.invert[content_type]}" if type == "THUMBNAIL"
+    extension = Rack::Mime::MIME_TYPES.invert[content_type]
+
+    return nil unless extension.present?
+    return "#{uuid}1200x1200#{extension}" if type == "MEDIUM"
+    return  "#{uuid}200x200#{extension}" if type == "THUMBNAIL"
   end
 
   private
