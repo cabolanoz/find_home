@@ -66,5 +66,21 @@ RSpec.describe PropertiesController, type: :controller do
 
   end
 
+  describe "PUT #update" do
+    let!(:property) {create(:property)}
+
+    it "should modify a property attribute properly" do
+      expectedTitle = Faker::Name.title
+      put :update, params: { id: property.id, property: {title: expectedTitle} }
+      expect(Property.find(property.id).title).to be_eql(expectedTitle)
+    end
+
+    it "should returned 404 not found if property id is invalid" do
+      bogus_id = 283
+      put :update, params: { id: bogus_id, property: {title: Faker::Name.title} }
+      expect(response).to have_http_status(404)
+    end
+  end
+
 
 end
